@@ -17,7 +17,7 @@ public class InsertionSort{
 		If it is smaller then it is inserted in front of it and this will happen till it gets to the front or finds its correct position
 		So basically we choose an element starting from the second position hence a[1] and then move backward to the front checking it
 		with other elements. This is not bubble sort, in which we do passes and we put the biggest element in the end. here we put the smallest
-		in the front...more correctly insert smaller element in its correct place
+		in the front...more correctly "insert" smaller element in its correct place
 		*/
 		for(int i=1; i<n; i++){
 			int element = arrayOfElements[i];
