@@ -148,7 +148,7 @@ public class LinkedList{
 			while(current.next!=null){
 				if(current.data==data){
 					System.out.println("Element found and deleted");
-					current.data = current.next.data;
+					current.current = data.next.data;
 					current.next = current.next.next;
 					return;
 				}
