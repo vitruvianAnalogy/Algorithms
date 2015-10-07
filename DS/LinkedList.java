@@ -28,6 +28,59 @@ public class LinkedList{
 
 	public Node head;
 
+	public int getMiddle(){
+
+		int counter = 1;
+		Node fast = head;
+		Node slow = head;
+
+		while(true){
+			counter++;
+			if(fast.next!=null){
+				fast = fast.next.next;
+			}
+			else
+				return counter;
+			slow = slow.next;
+		}
+
+		return 1;
+	}
+
+	/*How to find the intersection of two lists.
+	1. Traverse both lists and find the length of both lists and then calculate the difference
+	2. Traverse the difference in the larger list so that both lists are now at the same level
+	3. Now start comparing same level elements of both list and that is how you find the intersection*/
+
+	/*There are two methods. One with linear time but linear space too. It uses stack.
+	I am using the second method that reverse half the list and then the other half. This is linear and takes constant space*/
+	public boolean isPalindrome(){
+		Node current = head;
+
+		int middle = getMiddle();
+		Node headOfReversedList = reverseList()
+	}
+
+	public boolean isLoopPresent(){
+		Node slow = head;
+		Node fast = head;
+
+		while(true){
+			if (fast.next!=null)
+				fast = fast.next.next;
+			else
+				return false;
+
+			slow = slow.next;
+
+			// If either of them has reached null.
+			if(fast==null || slow==null)
+				return false;
+			if(fast==slow)
+				return true;
+		}
+	}
+
 	/*To reverse a singly list, we recurse till the bottom
 	and then come back out linking everything back*/
 	public Node reverseList(Node current){
@@ -148,7 +201,7 @@ public class LinkedList{
 			while(current.next!=null){
 				if(current.data==data){
 					System.out.println("Element found and deleted");
-					current.current = data.next.data;
+					current.data = current.next.data;
 					current.next = current.next.next;
 					return;
 				}
@@ -179,22 +232,42 @@ public class LinkedList{
 			n--;
 		}
 
+		//Detect loop in linked list
+		boolean hasLoop = myLinkedList.isLoopPresent();
+		if (hasLoop) {
+			System.out.println("Yes it has a loop. Whoa!!!");	
+		}
+		else
+		{
+			System.out.println("No loop. Told you!");
+		}
+		
+
+
 		//Find length
 		int length = myLinkedList.findLength();
 		System.out.println("Length of the linked list is " + length);
+
+		//Find recursive Length
 		int recursiveLength = myLinkedList.findRecursiveLength(myLinkedList.head);
 		System.out.println("Length of the linked list via recursion method is " + recursiveLength);
 
+
+		//Find element at a certain index
 		System.out.println("Which place number you want to find");
 		int nth = sn.nextInt();
 		int nthElement = myLinkedList.findNthElement(nth);
 		System.out.println("The nth element you wanted is "+ nthElement);
+
+		//Find element from the end of a linked list.
 		int nthElementFromTheBack = myLinkedList.findBackNthElement(nth);
 		System.out.println("The reverse nth element you wanted is "+ nthElementFromTheBack);
 
+		//Print the linked list
 		System.out.println("The linked list consists of");
 		myLinkedList.printList();
 
+		//Reverse the linked list
 		Node checkNode = myLinkedList.reverseList(myLinkedList.head);
 		if(checkNode==null)
 			System.out.println("No list exists");
@@ -205,11 +278,15 @@ public class LinkedList{
 		}
 			
 
-		//Deletion
+
+		//DELETIONS
+
+		//Delete a certain element from the linked list
 		int data = 2;
 		myLinkedList.deleteElement(data);
 		System.out.println("The linked list after deletion consists of");
 		myLinkedList.printList();
+
 
 		//Delete head
 		boolean isHeadDeleted = myLinkedList.deleteHead();
@@ -221,6 +298,7 @@ public class LinkedList{
 			System.out.println("List was empty");			
 		}
 
+		
 		//Delete the whole list
 		boolean isDeleted = myLinkedList.deleteList();
 		if(isDeleted){
